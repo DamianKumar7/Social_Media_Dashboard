@@ -31,4 +31,9 @@ kafka:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+logging:
+  file: /var/log/myapp.log # Set log file location
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+
 # Other configurations (logging, etc.)
