@@ -1,4 +1,5 @@
 package com.damian.auth.service;
+import com.damian.auth.DTO.LoginRequest;
 import com.damian.auth.DTO.RegistrationRequest;
 import com.damian.auth.model.User;
 import com.damian.auth.repository.UserRepository;
@@ -32,5 +33,19 @@ public class UserService {
         userRepository.save(newUser);
         logger.info(String.format("User registered with email id: %s",registrationRequest.getEmailId()));
         return true;
+    }
+
+    public User loginUser(LoginRequest loginRequest){
+        User user = userRepository.findByEmailId(loginRequest.getEmailId());
+        if(user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())){
+            return user;
+
+        }
+        return null;
+    }
+
+    public User getUserById(String emailId) {
+        User user = userRepository.findByEmailId(emailId);
+        return user;
     }
 }
