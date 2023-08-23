@@ -16,7 +16,7 @@ public class JwtGeneratorUtil {
     public String generateToken(User user){
         String jwtToken= "";
         jwtToken = Jwts.builder()
-                .setSubject(user.getUsername())
+                .setSubject(user.getEmailId())
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256,secret)
                 .compact();
