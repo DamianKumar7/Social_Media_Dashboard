@@ -1,7 +1,9 @@
 server:
-  port: 8080
+  port: 0
 
 spring:
+  application:
+    name: users-ws
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -30,4 +32,8 @@ kafka:
 jwt:
   secret: social-media-dashboard
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka
 # Other configurations (logging, etc.)
