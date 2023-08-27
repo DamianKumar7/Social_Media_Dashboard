@@ -1,27 +1,31 @@
 package com.damian.auth.configuration;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
+
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@Requi
+@RequiredArgsConstructor
 public class SecurityConfig {
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public FilterRegistrationBean jwtFilter(){
-        FilterRegistrationBean filter = new FilterRegistrationBean();
-        filter.setFilter(new JwtFilter());
-
-        filter.addUrlPatterns("/auth/users");
-
-        return filter;
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+                // disable CSRF protection
+                .csrf().disable()
+                .authorizeHttpRequests(
+                        authorizeHttpRequest ->
+                                authorizeHttpRequest
+                                        .requestMatchers(HttpMethod.POST,
+                                                "/auth/register",
+                                                "/auth/login")
+                                        .permitAll()
+                );
+        return http.build();
     }
 }

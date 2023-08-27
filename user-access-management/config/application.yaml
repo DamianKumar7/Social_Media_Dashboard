@@ -7,7 +7,10 @@ spring:
     username: postgres
     password: Damian2000#
     driver-class-name: org.postgresql.Driver
-
+  security:
+    user:
+      name: admin
+      password: admin-password
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,15 +18,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
-# Security Configuration (customize according to your needs)
-security:
-  user:
-    name: admin
-    password: admin-password
-  basic:
-    enabled: true
-
+#
 # Kafka Configuration
 kafka:
   bootstrap-servers: localhost:9092
@@ -31,10 +26,6 @@ kafka:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-logging:
-  file: /var/log/myapp.log # Set log file location
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
 
 jwt:
   secret: social-media-dashboard
