@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://your-postgres-host:5432/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: Damian2000#
@@ -13,4 +13,4 @@ spring:
 
 # Configure JWT secret
 jwt:
-  secret: social-media-dashboard
+  secret: 9a5e4350373fe9be69b63e77b535b290a08009acc9ddfed3f521a2887855557b

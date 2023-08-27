@@ -19,6 +19,12 @@ public class DataProcessingController {
     @GetMapping("/twitter/highest_likes")
     public ResponseEntity<?> getTweetWithHighestLikes(@RequestBody UserDetails userDetails){
         Tweet tweet = dataService.getTweetWithHighestLikes(userDetails);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(tweet,HttpStatus.OK);
+    }
+
+    @GetMapping("/twitter/highest_retweets")
+    public ResponseEntity<?> getTweetWithHighestRetweets(@RequestBody UserDetails userDetails){
+        Tweet tweet = dataService.getTweetWithHighestRetweets(userDetails);
+        return new ResponseEntity<>(tweet,HttpStatus.OK);
     }
 }

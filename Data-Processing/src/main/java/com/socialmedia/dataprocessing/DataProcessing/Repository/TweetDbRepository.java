@@ -9,13 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TwitterDataRepository extends JpaRepository<TweetData, Long> {
+public interface TweetDbRepository extends JpaRepository<TweetData, Long> {
 
     // Add custom query methods here if needed
 
     List<TweetData> findByEmailId(String emailId);
 
-    @Query("SELECT t FROM twitterdb t WHERE t.email_id = :emailId AND t.like_count = (SELECT MAX(td.like_count) FROM twitterdb td WHERE td.email_id = :emailId)")
+    @Query("SELECT t FROM TweetData t WHERE t.emailId = :emailId AND t.likeCount = (SELECT MAX(td.likeCount) FROM TweetData td WHERE td.emailId = :emailId)")
     TweetData findTweetWithHighestLikes(@Param("emailId") String emailId);
 
+    @Query("SELECT t FROM TweetData t WHERE t.emailId = :emailId AND t.retweetCount = (SELECT MAX(td.retweetCount) FROM TweetData td WHERE td.emailId = :emailId)")
+    TweetData findTweetWithHighestRetweets(@Param("emailId") String emailId);
 }
